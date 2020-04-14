@@ -23,7 +23,7 @@ This module ingest telemetry messages using input **input1**.
 
 The messages passed through are sent using output **output1**
 
-## Output messages
+### Output messages
 
 The output messages are the same as inputted message except for an extra property like:
 
@@ -35,6 +35,19 @@ or
 
 ```
 Properties.Add("content-type", "application/edge-output1-json");
+```
+
+### Routes
+
+Use this example route:
+
+```
+{
+  "routes": {
+    "heartbeatToEcho": "FROM /messages/modules/heartbeat/outputs/output1 INTO BrokeredEndpoint(\"/modules/echo/inputs/input1\")",
+    "route": "FROM /messages/modules/echo/outputs/output1/* INTO $upstream"
+  }
+}
 ```
 
 ## Environment variables
