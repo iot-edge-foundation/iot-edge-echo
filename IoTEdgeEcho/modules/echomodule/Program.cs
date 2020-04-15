@@ -19,8 +19,6 @@ namespace echomodule
 
         private static ModuleOutputList _moduleOutputs;
 
-        public static int Bla { get; set; }
-
         static void Main(string[] args)
         {
             Init().Wait();
