@@ -11,7 +11,7 @@ This module is a simple module which helps to go get insights about module outpu
 
 A version generated for Docker Linux can be found at https://hub.docker.com/r/svelde/iot-edge-echo/
 
-You can pull it with **docker pull svelde/iot-edge-echo** but I suggest to use **svelde/iot-edge-echo:1.0** when you deploy it using the Azure portal.
+You can pull it with **docker pull svelde/iot-edge-echo** but I suggest to use **svelde/iot-edge-echo:1.0.3-amd64** (for Linux containers) when you deploy it using the Azure portal.
 
 ## Module Twin
 
