@@ -1,5 +1,6 @@
 # iot-edge-echo
-IoT Edge module which visualizes incoming messages and outputs them unchanged. Great for getting insights in your IoT Edge routing.
+
+IoT Edge module which visualizes incoming messages and outputs them unchanged. It's great for getting insights in your IoT Edge routing.
 
 ## Introduction
 
@@ -7,15 +8,21 @@ This is a C# .Net Standard module, written for Azure IoTEdge version GA.
 
 This module is a simple module which helps to go get insights about module outputs and outputted messages.
 
+It's great to check the output from third party modules (eg. the Azure Stream Analytics module).
+
+You can just put it next to another route to listen to the communication between these two routes. 
+
+*Note:* This module is not capable in splitting multiple streams of input data flowing through it.
+
 ## Docker Hub
 
 A version generated for Docker Linux can be found at https://hub.docker.com/r/svelde/iot-edge-echo/
 
-You can pull it with **docker pull svelde/iot-edge-echo** but I suggest to use **svelde/iot-edge-echo:1.0.3-amd64** (for Linux containers) when you deploy it using the Azure portal.
+You can pull it with **docker pull svelde/iot-edge-echo** but I suggest to use **svelde/iot-edge-echo:1.0.3-amd64** (for Linux containers) when you deploy it using the Azure portal or the IoT Edge deployment manifest.
 
 ## Module Twin
 
-This module does not support 'desired' properties.
+This module does not support 'desired' or 'reported' properties.
 
 ## Routing input and outputs
 
@@ -25,16 +32,10 @@ The messages passed through are sent using output **output1**
 
 ### Output messages
 
-The output messages are the same as inputted message except for an extra property like:
+The output messages are the same as inputted message except for one extra property:
 
 ```
-Properties.Add("content-type", "application/edge-echo-json");
-```
-
-or
-
-```
-Properties.Add("content-type", "application/edge-output1-json");
+Properties.Add("content-type", "application/edge-output1-echo-json");
 ```
 
 ### Routes
