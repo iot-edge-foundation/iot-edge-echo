@@ -73,17 +73,7 @@
             "status": "running",
             "restartPolicy": "always",
             "settings": {
-              "image": "${MODULES.echomodule.debug}",
-              "createOptions": {}
-            }
-          },
-          "SampleModule": {
-            "version": "1.0",
-            "type": "docker",
-            "status": "running",
-            "restartPolicy": "always",
-            "settings": {
-              "image": "${MODULES.SampleModule.debug}",
+              "image": "${MODULES.echomodule}",
               "createOptions": {}
             }
           }
@@ -95,8 +85,7 @@
         "schemaVersion": "1.0",
         "routes": {
           "echomoduleToIoTHub": "FROM /messages/modules/echomodule/outputs/* INTO $upstream",
-          "sensorToechomodule": "FROM /messages/modules/tempSensor/outputs/temperatureOutput INTO BrokeredEndpoint(\"/modules/echomodule/inputs/input1\")",
-          "SampleModuleToIoTHub": "FROM /messages/modules/SampleModule/outputs/* INTO $upstream"
+          "sensorToechomodule": "FROM /messages/modules/tempSensor/outputs/temperatureOutput INTO BrokeredEndpoint(\"/modules/echomodule/inputs/input1\")"
         },
         "storeAndForwardConfiguration": {
           "timeToLiveSecs": 7200
