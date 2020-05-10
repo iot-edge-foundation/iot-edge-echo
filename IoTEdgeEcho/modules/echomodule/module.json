@@ -2,7 +2,7 @@
     "$schema-version": "0.0.1",
     "description": "",
     "image": {
-        "repository": "svelde/iot-edge-echo",
+        "repository": "iotedgefoundation/iot-edge-echo",
         "tag": {
             "version": "2.0.1",
             "platforms": {
