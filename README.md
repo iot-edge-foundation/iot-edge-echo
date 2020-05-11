@@ -10,13 +10,13 @@ This module is a simple module which helps to go get insights about module outpu
 
 It's great to check the output from third party modules (eg. the Azure Stream Analytics module).
 
-You can just put it next to another route to listen to the communication between these two routes. 
+You can just put it next to another route to listen to the communication between these two routes.
 
 *Note:* This module is not capable in splitting multiple streams of input data flowing through it.
 
 ## Docker Hub
 
-A version generated for Docker Linux can be found at https://hub.docker.com/r/svelde/iot-edge-echo/
+A version generated for Docker Linux can be found at [https://hub.docker.com/r/svelde/iot-edge-echo/](https://hub.docker.com/r/svelde/iot-edge-echo/)
 
 You can pull it with **docker pull svelde/iot-edge-echo** but I suggest to use **svelde/iot-edge-echo:1.0.3-amd64** (for Linux containers) when you deploy it using the Azure portal or the IoT Edge deployment manifest.
 
@@ -34,7 +34,7 @@ The messages passed through are sent using output **output1**
 
 The output messages are the same as inputted message except for one extra property:
 
-```
+```javascript
 Properties.Add("content-type", "application/edge-output1-echo-json");
 ```
 
@@ -42,7 +42,7 @@ Properties.Add("content-type", "application/edge-output1-echo-json");
 
 Use this example route:
 
-```
+```json
 {
   "routes": {
     "heartbeatToEcho": "FROM /messages/modules/heartbeat/outputs/output1 INTO BrokeredEndpoint(\"/modules/echo/inputs/input1\")",
@@ -62,11 +62,3 @@ This logic is licenced under the MIT license.
 Want to contribute? Throw in a pull request....
 
 Want to know more about me? Check out my [blog](http://blog.vandevelde-online.com)
-
-
-
-
-
-
-
-
