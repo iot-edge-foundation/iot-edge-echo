@@ -13,13 +13,13 @@ namespace echomodule
     using Microsoft.Azure.Devices.Client.Transport.Mqtt;
     using Newtonsoft.Json;
 
-    class Program
+    internal class Program
     {
-        static int counter;
+        private static int counter;
 
         private static ModuleOutputList _moduleOutputs;
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Init().Wait();
 
@@ -44,7 +44,7 @@ namespace echomodule
         /// Initializes the ModuleClient and sets up the callback to receive
         /// messages containing temperature information
         /// </summary>
-        static async Task Init()
+        private static async Task Init()
         {
             Console.WriteLine("      _                         ___      _____   ___     _");
             Console.WriteLine("     /_\\   ___ _  _  _ _  ___  |_ _| ___|_   _| | __| __| | __ _  ___  ");
@@ -72,14 +72,14 @@ namespace echomodule
 
             // Register callback to be called when a message is received by the module
             await ioTHubModuleClient.SetInputMessageHandlerAsync("input1", PipeMessageInputOne, ioTHubModuleClient);
-      
+
             Console.WriteLine("This module uses input 'input1'");
 
             var variables = Environment.GetEnvironmentVariables();
 
             Console.WriteLine($"Found {variables.Count} Environment variables:");
 
-            foreach(DictionaryEntry variable in variables)
+            foreach (DictionaryEntry variable in variables)
             {
                 Console.WriteLine($"Environment variable '{variable.Key}': '{variable.Value}'");
             }
@@ -95,11 +95,11 @@ namespace echomodule
         }
 
         /// <summary>
-        /// This method is called whenever the module is sent a message from the EdgeHub. 
+        /// This method is called whenever the module is sent a message from the EdgeHub.
         /// It just pipe the messages without any change.
         /// It prints all the incoming messages.
         /// </summary>
-        static async Task<MessageResponse> PipeMessageInputOne(Message message, object userContext)
+        private static async Task<MessageResponse> PipeMessageInputOne(Message message, object userContext)
         {
             int counterValue = Interlocked.Increment(ref counter);
 
@@ -108,6 +108,10 @@ namespace echomodule
             {
                 throw new InvalidOperationException("UserContext doesn't contain " + "expected values");
             }
+
+            var connectionDeviceId = message.ConnectionDeviceId;
+
+            var connectionModuleId = message.ConnectionModuleId;
 
             byte[] messageBytes = message.GetBytes();
             string messageString = Encoding.UTF8.GetString(messageBytes);
@@ -131,6 +135,16 @@ namespace echomodule
                         Console.WriteLine($"Property added: '{prop.Key}'-'{prop.Value}'");
                     }
 
+                    if (!string.IsNullOrEmpty(connectionDeviceId))
+                    {
+                        Console.WriteLine($"connectionDeviceId: '{connectionDeviceId}'");
+                    }
+
+                    if (!string.IsNullOrEmpty(connectionModuleId))
+                    {
+                        Console.WriteLine($"ConnectionModuleId: '{connectionModuleId}'");
+                    }
+
                     await moduleOutput.SendMessage(messageBody);
 
                     Console.WriteLine("Received message echoed");
@@ -141,4 +155,3 @@ namespace echomodule
         }
     }
 }
-
