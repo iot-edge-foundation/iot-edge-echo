@@ -132,7 +132,7 @@ namespace echomodule
                     {
                         moduleOutput.Properties.Add(prop.Key, prop.Value);
 
-                        Console.WriteLine($"Property added: '{prop.Key}'-'{prop.Value}'");
+                        Console.WriteLine($"Property added: key:'{prop.Key}' value:'{prop.Value}'");
                     }
 
                     if (!string.IsNullOrEmpty(connectionDeviceId))
