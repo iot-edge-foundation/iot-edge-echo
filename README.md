@@ -1,24 +1,24 @@
 # iot-edge-echo
 
-IoT Edge module which visualizes incoming messages and outputs them unchanged. It's great for getting insights in your IoT Edge routing.
+IoT Edge module which visualizes incoming messages and outputs them unchanged. It's great for getting insights into your IoT Edge routing.
 
 ## Introduction
 
 This is a C# .Net Standard module, written for Azure IoTEdge version GA.
 
-This module is a simple module which helps to go get insights about module outputs and outputted messages.
+This module is a simple module that helps to go get insights about module outputs and outputted messages.
 
 It's great to check the output from third party modules (eg. the Azure Stream Analytics module).
 
 You can just put it next to another route to listen to the communication between these two routes.
 
-*Note:* This module is not capable in splitting multiple streams of input data flowing through it.
+*Note:* This module is not capable of splitting multiple streams of input data flowing through it.
 
 ## Docker Hub
 
 A version generated for Docker Linux can be found at [https://hub.docker.com/r/svelde/iot-edge-echo/](https://hub.docker.com/r/svelde/iot-edge-echo/)
 
-You can pull it with **docker pull svelde/iot-edge-echo** but I suggest to use **svelde/iot-edge-echo:3.0.1-amd64** (for Linux containers) when you deploy it using the Azure portal or the IoT Edge deployment manifest.
+You can pull it with **docker pull svelde/iot-edge-echo** but I suggest using **svelde/iot-edge-echo:3.0.1-amd64** (for Linux containers) when you deploy it using the Azure portal or the IoT Edge deployment manifest.
 
 ## Module Twin
 
@@ -26,7 +26,7 @@ This module does not support 'desired' or 'reported' properties.
 
 ## Routing input and outputs
 
-This module ingest telemetry messages using input **input1**.
+This module ingests telemetry messages using input **input1**.
 
 The messages passed through are sent using output **output1**
 
@@ -57,7 +57,7 @@ On initialize, this module exposes all available environment variables in the lo
 
 ## Contribute
 
-This logic is licenced under the MIT license.
+This logic is licensed under the MIT license.
 
 Want to contribute? Throw in a pull request....
 
