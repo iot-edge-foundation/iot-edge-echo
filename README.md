@@ -18,7 +18,7 @@ You can just put it next to another route to listen to the communication between
 
 A version generated for Docker Linux can be found at [https://hub.docker.com/r/svelde/iot-edge-echo/](https://hub.docker.com/r/svelde/iot-edge-echo/)
 
-You can pull it with **docker pull svelde/iot-edge-echo** but I suggest to use **svelde/iot-edge-echo:1.0.3-amd64** (for Linux containers) when you deploy it using the Azure portal or the IoT Edge deployment manifest.
+You can pull it with **docker pull svelde/iot-edge-echo** but I suggest to use **svelde/iot-edge-echo:3.0.1-amd64** (for Linux containers) when you deploy it using the Azure portal or the IoT Edge deployment manifest.
 
 ## Module Twin
 
