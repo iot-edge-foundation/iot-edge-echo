@@ -61,4 +61,6 @@ This logic is licenced under the MIT license.
 
 Want to contribute? Throw in a pull request....
 
+Sourcecode is available [here](https://github.com/iot-edge-foundation/iot-edge-echo).
+
 Want to know more about me? Check out my [blog](http://blog.vandevelde-online.com)
