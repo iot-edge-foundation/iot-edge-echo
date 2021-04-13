@@ -1,5 +1,6 @@
 namespace echomodule
 {
+    using System;
     using System.Collections.Generic;
     using System.Text;
     using System.Threading;
@@ -34,7 +35,9 @@ namespace echomodule
         {
             var jsonMessage = JsonConvert.SerializeObject(messageBody);
 
-            using (var message = new Message(Encoding.UTF8.GetBytes(jsonMessage)))
+            var messageBytes = Encoding.UTF8.GetBytes(jsonMessage);
+
+            using (var message = new Message(messageBytes))
             {
                 // Set message body type and content encoding for routing using decoded body values.
                 message.ContentEncoding = "utf-8";
@@ -46,6 +49,28 @@ namespace echomodule
                 }
 
                 await _ioTHubModuleClient.SendEventAsync(Name, message);
+
+                var size = CalculateSize(messageBytes, Properties);
+
+                Console.WriteLine($"Message with size {size} bytes sent.");
+            }
+        }
+
+        private static int CalculateSize(byte[] messageBytes, Dictionary<string, string> properties)
+        {
+            using (var message = new Message(messageBytes))
+            {
+                message.ContentEncoding = "utf-8";
+                message.ContentType = "application/json";
+
+                var result = message.GetBytes().Length;
+
+                foreach (var p in properties)
+                {
+                    result = result + p.Key.Length + p.Value.Length;
+                }
+
+                return result;
             }
         }
 

@@ -74,6 +74,7 @@ namespace echomodule
             await ioTHubModuleClient.SetInputMessageHandlerAsync("input1", PipeMessageInputOne, ioTHubModuleClient);
 
             Console.WriteLine("This module uses input 'input1'");
+            Console.WriteLine("This module uses output 'output1'");
 
             var variables = Environment.GetEnvironmentVariables();
 
