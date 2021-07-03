@@ -13,6 +13,8 @@ namespace echomodule
     using Microsoft.Azure.Devices.Client.Transport.Mqtt;
     using Newtonsoft.Json;
 
+    using ZipHelperLib;
+
     internal class Program
     {
         private static int counter;
@@ -115,6 +117,15 @@ namespace echomodule
             var connectionModuleId = message.ConnectionModuleId;
 
             byte[] messageBytes = message.GetBytes();
+
+            if (message.Properties.ContainsKey("ZipOnOutput")
+                    && message.Properties["ZipOnOutput"].ToLower() == "true")
+            {
+                var zippedLength = messageBytes.Length;
+                messageBytes = ZipHelper.UnzipByteArray(messageBytes);   
+                System.Console.WriteLine($"Uncompressed from {zippedLength} bytes to {messageBytes.Length} bytes");
+            }
+
             string messageString = Encoding.UTF8.GetString(messageBytes);
 
             Console.WriteLine($"-> Received echo message: {counterValue}, Body: '{messageString}'");
