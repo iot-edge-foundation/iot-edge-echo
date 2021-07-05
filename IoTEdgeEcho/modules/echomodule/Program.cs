@@ -118,11 +118,11 @@ namespace echomodule
 
             byte[] messageBytes = message.GetBytes();
 
-            if (message.Properties.ContainsKey("ZipOnOutput")
-                    && message.Properties["ZipOnOutput"].ToLower() == "true")
+            if (message.ContentEncoding == "gzip" 
+                    && message.ContentType == "application/zip")
             {
                 var zippedLength = messageBytes.Length;
-                messageBytes = ZipHelper.UnzipByteArray(messageBytes);   
+                messageBytes = GZipHelper.Unzip(messageBytes);   
                 System.Console.WriteLine($"Uncompressed from {zippedLength} bytes to {messageBytes.Length} bytes");
             }
 
