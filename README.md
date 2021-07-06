@@ -55,6 +55,15 @@ Use this example route:
 
 On initialize, this module exposes all available environment variables in the logging.
 
+
+## GZip, Deflate
+
+Messages which ContentEncoding is "gzip" and ContentType is "application/zip" will be unzipped using Gzip decompression. 
+
+Messages which ContentEncoding is "defalte" and ContentType is "application/zip" will be unzipped using Deflate decompression.
+
+The library [ZipHelper](https://www.nuget.org/packages/ZipHelperLib/) used, follows the [System.IO.Compression](https://docs.microsoft.com/en-us/dotnet/api/system.io.compression?view=net-5.0) guidelines.
+
 ## Contribute
 
 This logic is licensed under the MIT license.

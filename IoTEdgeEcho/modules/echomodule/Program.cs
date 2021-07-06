@@ -123,6 +123,14 @@ namespace echomodule
             {
                 var zippedLength = messageBytes.Length;
                 messageBytes = GZipHelper.Unzip(messageBytes);   
+                System.Console.WriteLine($"Uncompressed from GZIP {zippedLength} bytes to {messageBytes.Length} bytes");
+            }
+
+            if (message.ContentEncoding == "deflate" 
+                    && message.ContentType == "application/zip")
+            {
+                var zippedLength = messageBytes.Length;
+                messageBytes = DeflateHelper.Unzip(messageBytes);   
                 System.Console.WriteLine($"Uncompressed from {zippedLength} bytes to {messageBytes.Length} bytes");
             }
 
