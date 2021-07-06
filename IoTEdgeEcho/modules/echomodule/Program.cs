@@ -131,7 +131,7 @@ namespace echomodule
             {
                 var zippedLength = messageBytes.Length;
                 messageBytes = DeflateHelper.Unzip(messageBytes);   
-                System.Console.WriteLine($"Uncompressed from {zippedLength} bytes to {messageBytes.Length} bytes");
+                System.Console.WriteLine($"Uncompressed from Deflate {zippedLength} bytes to {messageBytes.Length} bytes");
             }
 
             string messageString = Encoding.UTF8.GetString(messageBytes);
