@@ -138,37 +138,44 @@ namespace echomodule
 
             Console.WriteLine($"-> Received echo message: {counterValue}, Body: '{messageString}'");
 
-            if (!string.IsNullOrEmpty(messageString))
+            try
             {
-                var messageBody = JsonConvert.DeserializeObject(messageString);
-
-                var moduleOutput = _moduleOutputs.GetModuleOutput("output1");
-
-                if (moduleOutput != null)
+                if (!string.IsNullOrEmpty(messageString))
                 {
-                    moduleOutput.Properties.Clear();
+                    var messageBody = JsonConvert.DeserializeObject(messageString);
 
-                    foreach (var prop in message.Properties)
+                    var moduleOutput = _moduleOutputs.GetModuleOutput("output1");
+
+                    if (moduleOutput != null)
                     {
-                        moduleOutput.Properties.Add(prop.Key, prop.Value);
+                        moduleOutput.Properties.Clear();
 
-                        Console.WriteLine($"Property added: key:'{prop.Key}' value:'{prop.Value}'");
+                        foreach (var prop in message.Properties)
+                        {
+                            moduleOutput.Properties.Add(prop.Key, prop.Value);
+
+                            Console.WriteLine($"Property added: key:'{prop.Key}' value:'{prop.Value}'");
+                        }
+
+                        if (!string.IsNullOrEmpty(connectionDeviceId))
+                        {
+                            Console.WriteLine($"connectionDeviceId: '{connectionDeviceId}'");
+                        }
+
+                        if (!string.IsNullOrEmpty(connectionModuleId))
+                        {
+                            Console.WriteLine($"ConnectionModuleId: '{connectionModuleId}'");
+                        }
+
+                        await moduleOutput.SendMessage(messageBody);
+
+                        Console.WriteLine("Received message echoed");
                     }
-
-                    if (!string.IsNullOrEmpty(connectionDeviceId))
-                    {
-                        Console.WriteLine($"connectionDeviceId: '{connectionDeviceId}'");
-                    }
-
-                    if (!string.IsNullOrEmpty(connectionModuleId))
-                    {
-                        Console.WriteLine($"ConnectionModuleId: '{connectionModuleId}'");
-                    }
-
-                    await moduleOutput.SendMessage(messageBody);
-
-                    Console.WriteLine("Received message echoed");
                 }
+            }
+            catch (System.Exception ex) 
+            {
+                System.Console.WriteLine($"Exception: {ex.Message}");
             }
 
             return MessageResponse.Completed;

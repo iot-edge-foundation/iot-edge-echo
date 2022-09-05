@@ -38,6 +38,8 @@ The output messages are the same as inputted message except for one extra proper
 Properties.Add("content-type", "application/edge-output1-echo-json");
 ```
 
+_Note_: If the incoming message is not a valid JSON message, the message will throw an exception instead of output.
+
 ### Routes
 
 Use this example route:
