@@ -66,6 +66,9 @@ namespace echomodule
 
             // Open a connection to the Edge runtime
             var ioTHubModuleClient = await ModuleClient.CreateFromEnvironmentAsync(settings);
+        
+            ioTHubModuleClient.SetConnectionStatusChangesHandler(onConnectionStatusChanges);
+        
             await ioTHubModuleClient.OpenAsync();
 
             AddOutputs(ioTHubModuleClient);
@@ -88,6 +91,17 @@ namespace echomodule
             }
 
             Console.WriteLine("--------------------------------");
+
+            System.Console.WriteLine($"DiagnosticSamplingPercentage: {ioTHubModuleClient.DiagnosticSamplingPercentage}"); 
+
+            Console.WriteLine("--------------------------------");
+        }
+
+        static void onConnectionStatusChanges(ConnectionStatus status, ConnectionStatusChangeReason reason)
+        {
+            Console.WriteLine("***");
+            Console.WriteLine($"*** Connection status changed! Status: {status}; Reason: {reason}");
+            Console.WriteLine("***");
         }
 
         private static void AddOutputs(ModuleClient ioTHubModuleClient)
